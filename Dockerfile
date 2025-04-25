@@ -21,10 +21,11 @@ COPY . .
 
 # Variables necesarias para Composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV SYMFONY_SKIP_AUTO_RUN=1
 
 # Instalar dependencias del backend
 RUN composer install --working-dir=/var/www/html/backend --no-interaction --no-scripts \
-    && composer require symfony/browser-kit:^4.3 --working-dir=/var/www/html/backend
+    && composer require symfony/browser-kit:^4.3 --working-dir=/var/www/html/backend --no-scripts
 
 # Opción: puedes dejar esta línea si estás seguro que la app está bien configurada
 # RUN php backend/bin/console cache:clear
