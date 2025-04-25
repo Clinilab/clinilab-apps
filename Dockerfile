@@ -19,19 +19,16 @@ WORKDIR /var/www/html/
 # Copiar el proyecto completo
 COPY . .
 
-# Variables necesarias para Composer
+# Variables necesarias para Composer y Symfony
 ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV SYMFONY_SKIP_AUTO_RUN=1
 
-# Instalar dependencias del backend
+# Instalar dependencias del backend sin ejecutar scripts automáticos
 RUN composer install --working-dir=/var/www/html/backend --no-interaction --no-scripts \
     && composer require symfony/browser-kit:^4.3 --working-dir=/var/www/html/backend --no-scripts
 
-# Opción: puedes dejar esta línea si estás seguro que la app está bien configurada
-# RUN php backend/bin/console cache:clear
-
-# Establecer permisos correctos para Symfony
-RUN chown -R www-data:www-data /var/www/html/backend/var
+# Establecer permisos correctos si el directorio existe
+RUN [ -d /var/www/html/backend/var ] && chown -R www-data:www-data /var/www/html/backend/var || true
 
 # Exponer el puerto 80
 EXPOSE 80
