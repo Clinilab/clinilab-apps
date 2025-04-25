@@ -1,0 +1,13 @@
+# .htaccess para Render
+RewriteEngine On
+
+# Si la ruta empieza por /api, redirigir al backend Symfony
+RewriteCond %{REQUEST_URI} ^/api
+RewriteRule ^api/(.*)$ /backend/public/index.php/$1 [L]
+
+# Si el archivo o carpeta existe en frontend, servirlo normalmente
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Si no existe el archivo (SPA Angular), redirigir a frontend/index.html
+RewriteRule ^(.*)$ /frontend/index.html [L]

@@ -1,0 +1,15 @@
+/var
+*.log
+tmp/
+/var/cache
+/var/log/*
+/var/log/
+/var/cache/*
+/var/*
+/var/cache/dev/pools
+/var/cache/dev/pools/*
+var/cache/dev/pools/8AXZIFCFLi/
+var/cache/dev/pools/8AXZIFCFLi/*
+var/cache/dev/
+var/cache/dev/*
+
